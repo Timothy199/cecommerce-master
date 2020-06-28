@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "673843016331",
+    "firebase_url": "https://cleintecommerce.firebaseio.com",
+    "project_id": "cleintecommerce",
+    "storage_bucket": "cleintecommerce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:673843016331:android:95aaf9bf6fed6f96001a8e",
+        "android_client_info": {
+          "package_name": "com.example.ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "673843016331-n3gqueiqmuoiqcbj5iujob8700qrs40t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDceeJq4sfiFhIEJKN9UyljzWL07YcFmbQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "673843016331-n3gqueiqmuoiqcbj5iujob8700qrs40t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
