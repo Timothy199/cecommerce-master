@@ -20,6 +20,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:ecommerce/Config/config.dart';
+import 'package:smooth_star_rating/smooth_star_rating.dart';
 import '../Widgets/customAppBar.dart';
 import '../Widgets/loadingWidget.dart';
 import '../Widgets/myDrawer.dart';
@@ -173,7 +174,7 @@ class _CleintStoreHomeState extends State<CleintStoreHome> {
                           itemBuilder: (context, index) {
                             BookModel model = BookModel.fromJson(
                                 snapshot.data.documents[index].data);
-                            return sourceInfo(model, context);
+                            return sourceInfo(model, context,snapshot.data.documents[index].documentID);
                           },
                           itemCount: snapshot.data.documents.length,
                         );
@@ -185,13 +186,13 @@ class _CleintStoreHomeState extends State<CleintStoreHome> {
   }
 }
 
-Widget sourceInfo(BookModel model, BuildContext context,
-    {Color background, removeCartFunction}) {
-  print('Printing.. $removeCartFunction');
+Widget sourceInfo(BookModel model, BuildContext context, String documentID,
+    {Color background, removeCartFunction,bool isProductPage=false}) {
+  print('Printing.. update cart ${model.avarageRating} $removeCartFunction');
   return InkWell(
     onTap: () {
       Route route =
-          MaterialPageRoute(builder: (_) => ProductPage(bookModel: model));
+          MaterialPageRoute(builder: (_) => ProductPage(bookModel: model,documentID: documentID,));
       Navigator.push(context, route);
     },
     splashColor: LightColor.purple,
@@ -204,6 +205,8 @@ Widget sourceInfo(BookModel model, BuildContext context,
               aspectRatio: .7,
               child: card(primaryColor: background, imgPath: model.urls[0]),
             ),
+
+
             Expanded(
                 child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -269,6 +272,58 @@ Widget sourceInfo(BookModel model, BuildContext context,
                     ),
                   ],
                 ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child:                 RichText(text: TextSpan(
+                      text: 'Number of views: ',
+                      style: AppTheme.h6Style.copyWith(
+                        fontSize: 14,
+                        color: LightColor.grey,
+                      ),
+                      children: [
+                        TextSpan(
+                            text: model.views.toString(),
+                            style: AppTheme.h6Style.copyWith(
+                              fontSize: 14,
+                              color: Colors.red,
+                            )
+                        )
+                      ]
+                  )),
+
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10),
+                  child:                 RichText(text: TextSpan(
+                      text: 'Average rating: ',
+                      style: AppTheme.h6Style.copyWith(
+                        fontSize: 14,
+                        color: LightColor.grey,
+                      ),
+                      children: [
+                        TextSpan(
+                            text: model.avarageRating==null?'No reviews yet':model.avarageRating.toStringAsFixed(2),
+                            style: AppTheme.h6Style.copyWith(
+                              fontSize: 14,
+                              color: Colors.red,
+                            )
+                        )
+                      ]
+                  )),
+
+                ),
+//                Text(model.views.toString()),
+//                SmoothStarRating(
+//                  color: Colors.pink,
+//                  rating: model.avarageRating,
+//                  allowHalfRating: false,
+//                  spacing: 5,
+//                  isReadOnly: true,
+//                  size: 25,
+//                  starCount: 5,
+//                ),
+
+//                Text(model.avarageRating.toString()),
                 Flexible(
                   child: Container(),
                 ),

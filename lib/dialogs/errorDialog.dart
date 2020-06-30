@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 class ErrorAlertDialog extends StatelessWidget {
   final String message;
-  const ErrorAlertDialog({Key key, this.message}) : super(key: key);
+  final bool doublePop;
+  const ErrorAlertDialog({Key key, this.message, this.doublePop=false}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -12,6 +13,8 @@ class ErrorAlertDialog extends StatelessWidget {
       actions: <Widget>[
         RaisedButton(onPressed: (){
           Navigator.pop(context);
+
+          if(doublePop)Navigator.pop(context);
         },
           color: Colors.red,
           child: Center(

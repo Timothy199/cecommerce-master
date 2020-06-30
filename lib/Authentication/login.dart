@@ -71,8 +71,9 @@ class _LoginState extends State<Login> {
               child: Text('Log in'),
             ),
             SizedBox(
-              height: 50,
+              height: 20,
             ),
+
             Container(
               height: 3,
               width: _screenWidth * 0.8,
@@ -81,10 +82,94 @@ class _LoginState extends State<Login> {
             SizedBox(
               height: 10,
             ),
+            RaisedButton(
+              onPressed: _resetPassword,
 
+              color: Colors.redAccent,
+              child: Text('Forget Password'),
+            ),
+            SizedBox(height: 10,)
           ],
         ),
       ),
+    );
+  }
+
+  void _resetPassword(){
+    final _emailController = TextEditingController();
+    showDialog(
+      context: context,
+      builder: (_){
+        return AlertDialog(
+          content: TextField(
+            controller: _emailController,
+            decoration :InputDecoration(
+            border: InputBorder.none,
+            prefixIcon: Icon(
+            Icons.email,
+            color: Theme.of(context).primaryColor,
+        ),
+        focusColor: Theme.of(context).primaryColor,
+        hintText: 'Enter your email',
+          ),),
+          actions: <Widget>[
+            RaisedButton(
+              child: Text('Cancel'),
+              onPressed: (){
+                Navigator.pop(context);
+              },
+            ),
+            RaisedButton(
+              child: Text('Send Email'),
+       onPressed: () async{
+         if(_emailController.text.isEmpty){
+           showDialog(
+                    context: context,
+                    builder: (con) {
+                      return ErrorAlertDialog(
+                        message: 'Please fill the desired fields',
+                      );
+                    });
+           return ;
+         }
+         showDialog(
+           context: context,
+           builder: (_){
+             return LoadingAlertDialog(
+               message: 'Please wait',
+             );
+           }
+         );
+         await _auth.sendPasswordResetEmail(email: _emailController.text.trim())
+             .then((auth) {
+           //currentUser = auth.user;
+           Navigator.pop(context);
+           showDialog(
+               context: context,
+               builder: (con) {
+                 return ErrorAlertDialog(
+                   message: 'Email has been sent to ${_emailController.text}',
+                   doublePop: true
+                 );
+               });
+
+         }).catchError((error) {
+           Navigator.pop(context);
+           showDialog(
+               context: context,
+               builder: (con) {
+                 return ErrorAlertDialog(
+                   message: error.message.toString(),
+                 );
+               });
+         });
+       },
+
+            ),
+          ],
+
+        );
+      }
     );
   }
 

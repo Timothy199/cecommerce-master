@@ -1,6 +1,7 @@
 class UniversityApp{
   static const  String collectionAllBook = 'myBooks';
   static String collectionUser = "users";
+  static String collectionReview = "reviews";
   static String collectionOrders = "orders";  // subCollection
   static String userCartList = 'userCart';
   static String subCollectionAddress = 'userAddress';

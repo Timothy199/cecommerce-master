@@ -87,6 +87,8 @@ class _SellBookState extends State<SellBook> {
               title: title.text,
               description: description.text,
               price: double.parse(price.text),
+              avarageRating: null,
+              views: 0,
               uid: EcommerceApp.sharedPreferences
                   .getString(EcommerceApp.userUID),
               urls: imageUrls);

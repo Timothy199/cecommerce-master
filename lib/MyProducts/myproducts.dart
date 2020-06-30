@@ -71,7 +71,7 @@ class _MyProductsState extends State<MyProducts> {
                           itemBuilder: (context, index) {
                             BookModel model = BookModel.fromJson(
                                 snapshot.data.documents[index].data);
-                            return sourceInfo(model, context,
+                            return sourceInfo(model, context,snapshot.data.documents[index].documentID,
                                 removeCartFunction: () => deleteProduct(
                                     snapshot.data.documents[index].documentID));
                           },

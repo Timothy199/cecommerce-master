@@ -5,12 +5,16 @@ class BookModel {
   String uid;
   List<String> urls;
   double price;
+  double avarageRating;
+  int views;
 
   BookModel(
       {this.title,
         this.isbn,
         this.description,
         this.uid,
+        this.avarageRating,
+        this.views,
         this.urls,
         this.price});
 
@@ -18,6 +22,8 @@ class BookModel {
     title = json['title'];
     isbn = json['isbn'];
     description = json['description'];
+    views = json['views'];
+    avarageRating = json['rating'];
     uid = json['uid'];
     urls = json['urls'].cast<String>();
     price = json['price'];
@@ -27,6 +33,8 @@ class BookModel {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['title'] = this.title;
     data['isbn'] = this.isbn;
+    data['views']=this.views;
+    data['rating'] = this.avarageRating;
     data['description'] = this.description;
     data['uid'] = this.uid;
     data['urls'] = this.urls;
@@ -34,3 +42,5 @@ class BookModel {
     return data;
   }
 }
+
+// Adding views and average rating;
